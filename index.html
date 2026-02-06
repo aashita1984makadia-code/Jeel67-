@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All-in-One Downloader</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input, textarea, button {
+      width: 90%;
+      max-width: 400px;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    button {
+      background: #22c55e;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #16a34a;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚡ All-in-One Downloader</h1>
+
+  <!-- URL Downloader -->
+  <input type="text" id="url" placeholder="Paste file / image / video URL">
+  <button onclick="downloadURL()">Download from URL</button>
+
+  <hr style="margin:30px">
+
+  <!-- Text Downloader -->
+  <textarea id="text" placeholder="Write text to download"></textarea>
+  <input type="text" id="filename" placeholder="File name (example.txt)">
+  <button onclick="downloadText()">Download Text File</button>
+
+  <script>
+    function downloadURL() {
+      const url = document.getElementById("url").value;
+      if (!url) return alert("Enter URL");
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "";
+      a.target = "_blank";
+      a.click();
+    }
+
+    function downloadText() {
+      const text = document.getElementById("text").value;
+      const name = document.getElementById("filename").value || "file.txt";
+
+      const blob = new Blob([text], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      a.click();
+    }
+  </script>
+
+</body>
+</html>
